@@ -106,6 +106,7 @@ public class Socis extends Membre_Equip{
                 System.out.println("Data introduïda incorectament");
             }
         }while(!data_correct);
+        
         Telefon comp_tel = new Telefon();
         int telefon;
         
@@ -143,8 +144,15 @@ public class Socis extends Membre_Equip{
         for(Socis s1:socis){
             if(dni_mod.equals(s1.getDni())){
                 
-                System.out.println("Posar el nou DNI del Soci: ");
-                String dni = sc.next();
+                DNI comp_dni = new DNI();
+                String dni;
+
+                do{
+                    System.out.println("Posar el nou DNI del Soci: ");
+                    dni = sc.next();
+                }while(!comp_dni.validarDni(dni));
+                comp_dni.setDni(dni);
+                setDni(dni);
                 
                 System.out.println("Posar el nou nom del Soci: ");
                 String nom = sc.next();
@@ -152,15 +160,39 @@ public class Socis extends Membre_Equip{
                 System.out.println("Posar el nou cognom del Soci: ");
                 String cognom = sc.next();
                 
-                System.out.println("Posar la data naixement del Soci: ");
-                String data = sc.next();
-                LocalDate datanaixement = LocalDate.parse(data);
+                LocalDate datanaixement=null;
+                boolean data_correct=false;
+                do{
+                    try{
+                        data_correct=true;
+                        System.out.println("Posar la data naixement del Soci: (aaaa-mm-dd)");
+                        String data = sc.next();
+                        datanaixement = LocalDate.parse(data);
+                    }catch(Exception ex){
+                        data_correct=false;
+                        System.out.println("Data introduïda incorectament");
+                    }
+                }while(!data_correct);
                 
-                System.out.println("Posar el numero telefon del Soci");
-                int telefon = sc.nextInt();
+                Telefon comp_tel = new Telefon();
+                int telefon;
+
+                do{
+                    System.out.println("Posar el numero telefon del Soci: ");
+                    telefon = sc.nextInt();
+                }while(!comp_tel.validaTelefon(telefon));
+                comp_tel.setTelefon(telefon);
+                setTelefon(telefon);
                 
-                System.out.println("Posar el correu del Soci: ");
-                String email = sc.next();
+                Email comp_email = new Email();
+                String email;
+
+                do{
+                    System.out.println("Posar el correu del Soci: ");
+                    email = sc.next();
+                }while(!comp_email.validaEmail(email));
+                comp_email.setEmail(email);
+                setEmail(email);
 
                 System.out.println("Posar la quota anual: ");
                 int quota_anual = sc.nextInt();

@@ -146,7 +146,7 @@ public class Equip_Futbol {
                         op = sc.next();
                         opcio = op.charAt(0);
                         
-                        System.out.println("\nOpció" + opcio + "\n");
+                        System.out.println("\nOpció: " + opcio + "\n");
                         
                         switch(opcio){
                             case'1':
@@ -159,7 +159,31 @@ public class Equip_Futbol {
                                 ep.BaixaEmpleat(empleats);
                                 break;
                             case'4':
-                                ep.VisualitzarPerCriteris(empleats);
+                                do{
+                                    enrere1=false;
+                                    enrere2=false;
+                                    
+                                    System.out.println("a. Visualitzar per Rols");
+                                    System.out.println("b. Visualitzar per Sou Variable");
+                                    System.out.println("s. Enrere");
+                                    
+                                    op = sc.next();
+                                    opcio = op.charAt(0);
+                                    
+                                    System.out.println("\nOpció: " + opcio + "\n");
+                                    
+                                    switch(opcio){
+                                        case'a':
+                                            ep.VisualitzarPerRols(empleats);
+                                            break;
+                                        case'b':
+                                            ep.VisualitzarPerSou(empleats);
+                                            break;
+                                        case's':
+                                            enrere2=true;
+                                            break;
+                                    }
+                                }while(!enrere2);
                                 break;
                             case'5':
                                 enrere1=true;
@@ -186,6 +210,21 @@ public class Equip_Futbol {
     }
     
     public void VisualitzarDadesEco(){
+        int balanç = calculaDadesEco();
+        System.out.println("El balanç del club es: " + balanç);
+    }
+    
+    public int calculaDadesEco(){
+        int total_quota=0;
+        for(Socis s1: socis){
+            total_quota+=s1.getQuotaAnual();
+        }
         
+        int total_sou_inc=0;
+        for(Empleat_Plantilla ep1 : empleats){
+            total_sou_inc+=ep1.getSou_variable();
+        }
+        int balanç=total_quota-total_sou_inc;
+        return balanç;
     }
 }

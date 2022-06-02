@@ -1,6 +1,7 @@
 
 package membres_equip.Tecnic;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import membres_equip.Empleat_Plantilla;
 
@@ -13,26 +14,11 @@ public class Tecnic extends Empleat_Plantilla{
     public void setSou_variable(int sou_variable) {
         this.sou_variable = sou_variable;
     }
-    
-    public void gestioTecnic(){
-        Scanner sc = new Scanner(System.in);
-        
-        System.out.println("****** Tria el tipus del Tecnic ******");
-        System.out.println("1. Entrenador");
-        System.out.println("2. Preparador fisic");
-        
-        String op = sc.next();
-        char opcio = op.charAt(0);
-        
-        switch(opcio){
-            case'1':
-                Entrenador e = new Entrenador();
-                e.altaEntrenador();
-                break;
-            case'2':
-                Preparador_fisic pf = new Preparador_fisic();
-                pf.altaPreparadorFisic();
-                break;
-        }
+
+    public Tecnic(String dni, String nom, String cognom, LocalDate datanaixement, int telefon, String email, int numero_empleat, int numeroSS, int sou_base, int sou_variable) {
+        super(dni, nom, cognom, datanaixement, telefon, email, numero_empleat, numeroSS, sou_base, sou_variable);
+    }
+
+    public Tecnic() {
     }
 }
