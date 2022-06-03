@@ -1,6 +1,7 @@
 
 package membres_equip;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +16,7 @@ import membres_equip.Tecnic.Entrenador;
 import membres_equip.Tecnic.Preparador_fisic;
 import membres_equip.Tecnic.Tecnic;
 
-public class Empleat_Plantilla extends Membre_Equip{
+public class Empleat_Plantilla extends Membre_Equip implements Serializable{
     
     private int numero_empleat=0;
     private int numeroSS;

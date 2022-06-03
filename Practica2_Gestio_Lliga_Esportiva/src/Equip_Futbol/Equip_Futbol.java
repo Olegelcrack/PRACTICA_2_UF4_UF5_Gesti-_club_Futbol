@@ -1,6 +1,12 @@
 
 package Equip_Futbol;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -54,6 +60,8 @@ public class Equip_Futbol {
     public void GestioEquip() throws ParseException{
         Scanner sc = new Scanner(System.in);
         
+        Inici();
+        
         do{
             System.out.println("\n************* Menu Club *************");
             
@@ -74,6 +82,9 @@ public class Equip_Futbol {
                     break;
                 case'2':
                     do{
+                        enrere=false;
+                        enrere1=false;
+                        enrere2=false;
                         System.out.println("1. Alta Soci");
                         System.out.println("2. Modificacio Soci");
                         System.out.println("3. Baixa Soci");
@@ -98,6 +109,7 @@ public class Equip_Futbol {
                             case '4':
                                 do{
                                     enrere=false;
+                                    enrere1=false;
                                     enrere2=false;
                                     System.out.println("a. Visualitzar per Cognom i Nom");
                                     System.out.println("b. Visualitzar per Localitat");
@@ -137,6 +149,9 @@ public class Equip_Futbol {
                     break;
                 case'3':
                     do{
+                        enrere=false;
+                        enrere1=false;
+                        enrere2=false;
                         System.out.println("1. Alta Plantilla");
                         System.out.println("2. Mod Plantilla");
                         System.out.println("3. Baixa Plantilla");
@@ -160,6 +175,7 @@ public class Equip_Futbol {
                                 break;
                             case'4':
                                 do{
+                                    enrere=false;
                                     enrere1=false;
                                     enrere2=false;
                                     
@@ -197,6 +213,7 @@ public class Equip_Futbol {
                     VisualitzarDadesEco();
                     break;
                 case'5':
+                    Guardar();
                     sortir=true;
                     break;
                 default:
@@ -226,5 +243,43 @@ public class Equip_Futbol {
         }
         int balanç=total_quota-total_sou_inc;
         return balanç;
+    }
+    
+    public void Inici(){
+        FileInputStream fitxer = null;
+        
+        try{
+            fitxer = new FileInputStream("dades/Dades_Club.txt");
+            ObjectInputStream ob_in_str = new ObjectInputStream(fitxer);
+            socis = (ArrayList<Socis>) ob_in_str.readObject();
+            empleats = (ArrayList<Empleat_Plantilla>) ob_in_str.readObject();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void Guardar(){
+        FileOutputStream fitxer = null;
+        
+        try{
+            fitxer = new FileOutputStream("dades/Dades_Club.txt");
+            ObjectOutputStream ob_out_str = new ObjectOutputStream(fitxer);
+            ob_out_str.writeObject(socis);
+            ob_out_str.writeObject(empleats);
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            try{
+                fitxer.close();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 }

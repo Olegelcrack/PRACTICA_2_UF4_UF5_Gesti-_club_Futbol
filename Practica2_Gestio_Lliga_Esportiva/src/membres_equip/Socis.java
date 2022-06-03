@@ -2,6 +2,7 @@
 package membres_equip;
 
 import Equip_Futbol.Equip_Futbol;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Socis extends Membre_Equip{
+public class Socis extends Membre_Equip implements Serializable{
     
     private int numeroSoci=0;
     private int numeroLocalitat=500;
@@ -253,7 +254,7 @@ public class Socis extends Membre_Equip{
         Collections.sort(socis, new Comparator<Socis>(){
             @Override
             public int compare(Socis s1, Socis s2){
-                return s1.getQuotaAnual()- (s2.getQuotaAnual());
+                return s2.getQuotaAnual()- (s1.getQuotaAnual());
             }
         });
         Visualitzar(socis);

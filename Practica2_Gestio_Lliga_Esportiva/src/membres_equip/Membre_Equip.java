@@ -2,10 +2,11 @@
 package membres_equip;
 
 import Equip_Futbol.Equip_Futbol;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Membre_Equip {
+public class Membre_Equip implements Serializable{
     
     private String dni;
     private String nom;
